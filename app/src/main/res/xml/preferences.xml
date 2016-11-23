@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="URL"
+        android:key="url"
+        android:defaultValue="@string/default_url"
+        android:icon="@android:drawable/sym_action_chat" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:title="Launch on Start"
+        android:key="launch_on_start" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:title="Lock screen on"
+        android:key="screen_lock" />
+</PreferenceScreen>
