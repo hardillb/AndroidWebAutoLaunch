@@ -22,9 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".SettingsActivity"
-            ></activity>
+        <activity android:name=".SettingsActivity" />
 
         <receiver
             android:name=".AutoStartReceiver"
@@ -35,6 +33,7 @@
             </intent-filter>
         </receiver>
 
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

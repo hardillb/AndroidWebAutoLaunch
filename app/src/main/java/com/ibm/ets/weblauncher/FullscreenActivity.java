@@ -75,7 +75,6 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
             if (actionBar != null) {
                 actionBar.show();
             }
-            //mControlsView.setVisibility(View.VISIBLE);
         }
     };
     private boolean mVisible;
@@ -143,18 +142,6 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
 
-        // Set up the user interaction to manually show or hide the system UI.
-//        mContentView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                toggle();
-//            }
-//        });
-
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
-//        findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
     }
 
     @Override
@@ -192,8 +179,19 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 hide();
-                Intent intent = new Intent(FullscreenActivity.this,SettingsActivity.class);
+                Intent intent = new Intent(FullscreenActivity.this, SettingsActivity.class);
                 FullscreenActivity.this.startActivityForResult(intent, 1);
+                return true;
+            }
+        });
+
+        MenuItem aboutMenuItem = menu.findItem(R.id.action_about);
+        aboutMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                hide();
+                Intent intent1 = new Intent(FullscreenActivity.this, MainActivity.class);
+                FullscreenActivity.this.startActivity(intent1);
                 return true;
             }
         });
