@@ -1,4 +1,4 @@
-package com.ibm.ets.weblauncher;
+package uk.me.hardill.weblauncher;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

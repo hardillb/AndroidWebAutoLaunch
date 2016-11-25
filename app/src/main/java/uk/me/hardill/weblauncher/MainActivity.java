@@ -1,4 +1,4 @@
-package com.ibm.ets.weblauncher;
+package uk.me.hardill.weblauncher;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

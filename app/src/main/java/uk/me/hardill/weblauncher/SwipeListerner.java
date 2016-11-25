@@ -1,4 +1,4 @@
-package com.ibm.ets.weblauncher;
+package uk.me.hardill.weblauncher;
 
 /**
  * Created by hardillb on 23/11/16.

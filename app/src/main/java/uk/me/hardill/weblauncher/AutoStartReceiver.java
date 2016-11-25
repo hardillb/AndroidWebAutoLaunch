@@ -1,11 +1,9 @@
-package com.ibm.ets.weblauncher;
+package uk.me.hardill.weblauncher;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Handler;
 import android.preference.PreferenceManager;
 
 public class AutoStartReceiver extends BroadcastReceiver {

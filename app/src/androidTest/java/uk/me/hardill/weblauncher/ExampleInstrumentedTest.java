@@ -1,4 +1,4 @@
-package com.ibm.ets.weblauncher;
+package uk.me.hardill.weblauncher;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.ibm.ets.weblauncher", appContext.getPackageName());
+        assertEquals("uk.me.hardill.weblauncher", appContext.getPackageName());
     }
 }

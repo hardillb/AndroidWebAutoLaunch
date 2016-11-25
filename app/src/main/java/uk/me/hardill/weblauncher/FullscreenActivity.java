@@ -1,4 +1,4 @@
-package com.ibm.ets.weblauncher;
+package uk.me.hardill.weblauncher;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -17,7 +17,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 /**
