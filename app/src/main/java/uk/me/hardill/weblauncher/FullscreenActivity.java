@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.WebSettings;
 import android.webkit.WebViewClient;
 
 /**
@@ -128,6 +129,7 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
         wv.setSwipeListener(this);
 
         wv.getSettings().setJavaScriptEnabled(true);
+        wv.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
 
         final String url = sharedPref.getString("url","");
 
@@ -140,7 +142,6 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
         if (screenOn) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
-
     }
 
     @Override
