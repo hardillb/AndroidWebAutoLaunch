@@ -10,10 +10,10 @@
         android:icon="@android:drawable/sym_action_chat" />
     <CheckBoxPreference
         android:defaultValue="false"
-        android:title="Launch on Start"
+        android:title="@string/title_launch_on_start"
         android:key="launch_on_start" />
     <CheckBoxPreference
         android:defaultValue="false"
-        android:title="Lock screen on"
+        android:title="@string/title_lock_screen_on"
         android:key="screen_lock" />
 </PreferenceScreen>
