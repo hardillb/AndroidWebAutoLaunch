@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WebLauncher</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="title_activity_settings">Einstellungen</string>
+    <string name="about">Über</string>
+    <string name="title_launch_on_start">Autostart aktivieren</string>
+    <string name="title_lock_screen_on">Sperrbildschirm ein</string>
+</resources>
