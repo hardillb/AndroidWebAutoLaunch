@@ -14,10 +14,6 @@
         android:key="launch_on_start" />
     <CheckBoxPreference
         android:defaultValue="false"
-        android:title="@string/title_close_when_screen_off"
-        android:key="close_app" />
-    <CheckBoxPreference
-        android:defaultValue="false"
         android:title="@string/title_lock_screen_on"
         android:key="screen_lock" />
 </PreferenceScreen>

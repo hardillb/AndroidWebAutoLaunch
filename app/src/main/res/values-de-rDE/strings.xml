@@ -6,5 +6,4 @@
     <string name="about">Über</string>
     <string name="title_launch_on_start">Autostart aktivieren</string>
     <string name="title_lock_screen_on">Sperrbildschirm ein</string>
-    <string name="title_close_when_screen_off">Beenden wenn Display aus ist</string>
 </resources>
