@@ -2,7 +2,6 @@ package uk.me.hardill.weblauncher;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.view.GestureDetectorCompat;
@@ -101,7 +100,6 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
     };
 
     private SharedPreferences sharedPref;
-    private ScreenStateReceiver mScreenStateReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,15 +122,6 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
-
-        boolean closeApp = sharedPref.getBoolean("close_app", false);
-        if (closeApp) {
-            mScreenStateReceiver = new ScreenStateReceiver();
-            IntentFilter screenStateFilter = new IntentFilter();
-            screenStateFilter.addAction(Intent.ACTION_SCREEN_ON);
-            screenStateFilter.addAction(Intent.ACTION_SCREEN_OFF);
-            registerReceiver(mScreenStateReceiver, screenStateFilter);
-        }
 
         final MyWebView wv = (MyWebView) mContentView;
         wv.setWebViewClient(new WebViewClient());
@@ -282,10 +271,5 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
     private void delayedHide(int delayMillis) {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
-    }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(mScreenStateReceiver);
     }
 }
