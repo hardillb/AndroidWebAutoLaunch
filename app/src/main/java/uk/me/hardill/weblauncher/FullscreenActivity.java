@@ -1,12 +1,20 @@
 package uk.me.hardill.weblauncher;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -41,6 +49,8 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
 
 
     private String currentURL = "";
+
+    private MyWebView wv;
 
     /**
      * Some older devices needs a small delay between UI widget updates
@@ -123,7 +133,7 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
 
-        final MyWebView wv = (MyWebView) mContentView;
+        wv = (MyWebView) mContentView;
         wv.setWebViewClient(new WebViewClient());
 
         wv.setSwipeListener(this);
@@ -137,11 +147,41 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
         Log.i("URL !!", url);
         currentURL = url;
 
-        wv.loadUrl(url);
+        Uri uri = Uri.parse(url);
+        if (uri.getScheme()!= null && uri.getScheme().equals("file")) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    AlertDialog alert = new AlertDialog.Builder(getApplicationContext())
+                            .setMessage("To access 'file://' URLs we need to request READ External Storage permission")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    ActivityCompat.requestPermissions(FullscreenActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+                                }
+                            })
+                            .create();
+                    alert.show();
+                } else {
+                    ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+                }
+            } else {
+                wv.loadUrl(url);
+            }
+        } else {
+            wv.loadUrl(url);
+        }
 
         boolean screenOn = sharedPref.getBoolean("screen_lock", false);
         if (screenOn) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            wv.loadUrl(currentURL);
         }
     }
 
@@ -209,7 +249,31 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
             String url = sharedPref.getString("url","");
             if (!url.equals(currentURL)) {
                 Log.i("NEW URL", url);
-                wv.loadUrl(url);
+                currentURL = url;
+                Uri uri = Uri.parse(url);
+                if (uri.getScheme()!= null && uri.getScheme().equals("file")) {
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                            AlertDialog alert = new AlertDialog.Builder(getApplicationContext())
+                                    .setMessage("To access 'file://' URLs we need to request READ External Storage permission")
+                                    .setCancelable(false)
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            ActivityCompat.requestPermissions(FullscreenActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+                                        }
+                                    })
+                                    .create();
+                            alert.show();
+                        } else {
+                            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+                        }
+                    } else {
+                        wv.loadUrl(url);
+                    }
+                } else {
+                    wv.loadUrl(url);
+                }
             }
             boolean screenOn = sharedPref.getBoolean("screen_lock", false);
             if (screenOn) {
