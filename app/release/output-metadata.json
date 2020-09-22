@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "uk.me.hardill.weblauncher",
+  "variantName": "release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "properties": [],
+      "versionCode": 9,
+      "versionName": "1.0.8",
+      "enabled": true,
+      "outputFile": "app-release.apk"
+    }
+  ]
+}

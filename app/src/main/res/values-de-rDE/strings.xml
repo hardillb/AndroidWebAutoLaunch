@@ -6,4 +6,5 @@
     <string name="about">Über</string>
     <string name="title_launch_on_start">Autostart aktivieren</string>
     <string name="title_lock_screen_on">Sperrbildschirm ein</string>
+    <string name="title_auto_play_video">Video automatisch abspielen</string>
 </resources>
