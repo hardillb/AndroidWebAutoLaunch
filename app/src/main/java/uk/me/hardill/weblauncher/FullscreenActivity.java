@@ -27,6 +27,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 /**
@@ -241,6 +242,15 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
         });
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //
+        if (wv.canGoBack()) {
+            wv.goBack();
+        }
+//        show();
     }
 
     @Override
