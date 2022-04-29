@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/WebLauncher.iml" filepath="$PROJECT_DIR$/WebLauncher.iml" group="WebLauncher" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="WebLauncher/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndroidWebAutoLaunch.iml" filepath="$PROJECT_DIR$/.idea/modules/AndroidWebAutoLaunch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/AndroidWebAutoLaunch.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/AndroidWebAutoLaunch.app.iml" />
     </modules>
   </component>
 </project>

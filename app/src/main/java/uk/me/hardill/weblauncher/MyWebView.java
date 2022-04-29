@@ -37,10 +37,10 @@ public class MyWebView extends WebView {
 
     GestureDetector.SimpleOnGestureListener sogl = new GestureDetector.SimpleOnGestureListener(){
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            Log.i("startX", "" + e1.getX());
-            Log.i("endX", "" + e2.getX());
-            Log.i("startY", "" + e1.getY());
-            Log.i("startY", "" + e2.getY());
+//            Log.i("startX", "" + e1.getX());
+//            Log.i("endX", "" + e2.getX());
+//            Log.i("startY", "" + e1.getY());
+//            Log.i("startY", "" + e2.getY());
 
             if (e1.getX() < 1200 && e1.getX() > 80) {
                 return false;
@@ -59,6 +59,12 @@ public class MyWebView extends WebView {
             return true;
         }
 
+        @Override
+        public void onLongPress(MotionEvent e) {
+            Log.i("Long Press", "location " + e.getX()+ "," + e.getY());
+            swipeListerner.onSwipe();
+            super.onLongPress(e);
+        }
 
         void show_toast(final String text) {
             Toast t = Toast.makeText(context, text, Toast.LENGTH_SHORT);

@@ -8,3 +8,6 @@
 /captures
 .externalNativeBuild
 app/app-release.apk
+app/*/*.aab
+app/release/*.apk
+app/release/output-metadata.json
