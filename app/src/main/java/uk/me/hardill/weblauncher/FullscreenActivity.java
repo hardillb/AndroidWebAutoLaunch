@@ -143,6 +143,8 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
         wv.getSettings().setLoadWithOverviewMode(true);
         wv.getSettings().setUseWideViewPort(true);
         wv.getSettings().setJavaScriptEnabled(true);
+        wv.getSettings().setDatabaseEnabled(true);
+        wv.getSettings().setDomStorageEnabled(true);
         wv.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
         wv.getSettings().setMediaPlaybackRequiresUserGesture(sharedPref.getBoolean("auto_play_video", false));
 
