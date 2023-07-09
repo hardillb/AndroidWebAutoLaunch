@@ -1,12 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion '30.0.2'
+    namespace 'uk.me.hardill.weblauncher'
+    compileSdkVersion 31
+    buildToolsVersion '30.0.3'
     defaultConfig {
         applicationId "uk.me.hardill.weblauncher"
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 11
         versionName '1.2.0'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
