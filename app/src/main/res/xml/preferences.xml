@@ -7,7 +7,7 @@
         android:title="URL"
         android:key="url"
         android:defaultValue="@string/default_url"
-        android:icon="@android:drawable/sym_action_chat" 
+        android:icon="@android:drawable/sym_action_chat"
         android:inputType="textUri" />
     <CheckBoxPreference
         android:defaultValue="false"
