@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -19,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Menu;
@@ -295,6 +297,20 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
                 getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             } else {
                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
+            boolean startOnBoot = sharedPref.getBoolean("launch_on_start", false);
+            if (startOnBoot) {
+                try{
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if(! Settings.canDrawOverlays(this)) {
+                            Log.i("START_ON_BOOT", "[startSystemAlertWindowPermission] requesting system alert window permission.");
+                            String uri = "package:" + getPackageName();
+                            startActivity(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse(uri)));
+                        }
+                    }
+                }catch (Exception e){
+                    Log.e("START_ON_BOOT", "[startSystemAlertWindowPermission] error:", e);
+                }
             }
         }
     }
