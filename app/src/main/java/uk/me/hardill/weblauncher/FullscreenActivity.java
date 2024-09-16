@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.net.http.SslError;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -139,7 +141,17 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
         mContentView = findViewById(R.id.fullscreen_content);
 
         wv = (MyWebView) mContentView;
-        wv.setWebViewClient(new WebViewClient());
+        wv.setWebViewClient(new WebViewClient(){
+            @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                Log.i("WEB","Allow private CA");
+                if (sharedPref.getBoolean("allow_private_certs", false)) {
+                    handler.proceed();
+                } else {
+                    handler.cancel();
+                }
+            }
+        });
 
         wv.setSwipeListener(this);
         wv.getSettings().setLoadWithOverviewMode(true);
