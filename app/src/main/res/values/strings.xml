@@ -34,5 +34,13 @@ limitations under the License.&lt;/p&gt;
 Icon made by &lt;a href=&quot;http://www.freepik.com/&quot;&gt;Freepik&lt;/a&gt; from &lt;a href=&quot;http://www.flaticon.com/&quot;&gt;www.flaticon.com&lt;/a&gt;
 &lt;/body&gt;
 &lt;/html&gt;</string>
+    <string name="https_error_html">&lt;html&gt;
+&lt;body&gt;
+&lt;h1&gt;HTTPS Certificate Error&lt;/h1&gt;
+
+&lt;p&gt;The server certificate is not valid.&lt;/p&gt;
+&lt;p&gt;You can disable checking in the Settings&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</string>
 
 </resources>

@@ -55,6 +55,7 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
 
 
     private String currentURL = "";
+    private Boolean httpsError = false;
 
     private MyWebView wv;
 
@@ -149,6 +150,9 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
                     handler.proceed();
                 } else {
                     handler.cancel();
+                    String errorMsg = getString(R.string.https_error_html);
+                    wv.loadData(errorMsg, "text/html", null);
+                    httpsError = true;
                 }
             }
         });
@@ -200,6 +204,7 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             wv.loadUrl(currentURL);
         }
@@ -302,6 +307,13 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
                     }
                 } else {
                     wv.loadUrl(url);
+                }
+            } else {
+                if (httpsError) {
+                    httpsError = false;
+                    wv.loadUrl(url);
+                } else {
+                    wv.reload();
                 }
             }
             boolean screenOn = sharedPref.getBoolean("screen_lock", false);
