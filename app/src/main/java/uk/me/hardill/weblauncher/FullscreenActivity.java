@@ -18,6 +18,7 @@ import androidx.core.view.MenuItemCompat;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.webkit.WebViewFeature;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -165,6 +166,15 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
         wv.getSettings().setDomStorageEnabled(true);
         wv.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
         wv.getSettings().setMediaPlaybackRequiresUserGesture(sharedPref.getBoolean("auto_play_video", false));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (WebViewFeature.isFeatureSupported(WebViewFeature.ALGORITHMIC_DARKENING)) {
+                wv.getSettings().setAlgorithmicDarkeningAllowed(true);
+            }
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
+                wv.getSettings().setForceDark(WebSettings.FORCE_DARK_AUTO);
+            }
+        }
 
         final String url = sharedPref.getString("url","");
 
