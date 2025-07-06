@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace 'uk.me.hardill.weblauncher'
-    compileSdkVersion 34
+    namespace 'uk.me.hardill.weblauncher':wq!
     defaultConfig {
         applicationId "uk.me.hardill.weblauncher"
         minSdkVersion 21
@@ -17,10 +16,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    buildToolsVersion '34.0.0'
     compileOptions {
         targetCompatibility agp_version
     }
+    compileSdk 35
+    buildToolsVersion '35.0.0 rc4'
 }
 
 dependencies {
