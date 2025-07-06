@@ -21,4 +21,8 @@
         android:defaultValue="false"
         android:key="auto_play_video"
         android:title="@string/title_auto_play_video" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="allow_private_certs"
+        android:title="@string/title_allow_private_certs"/>
 </PreferenceScreen>

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.net.http.SslError;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import androidx.core.view.MenuItemCompat;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.webkit.WebViewFeature;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,6 +30,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -53,6 +56,7 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
 
 
     private String currentURL = "";
+    private Boolean httpsError = false;
 
     private MyWebView wv;
 
@@ -139,7 +143,20 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
         mContentView = findViewById(R.id.fullscreen_content);
 
         wv = (MyWebView) mContentView;
-        wv.setWebViewClient(new WebViewClient());
+        wv.setWebViewClient(new WebViewClient(){
+            @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                Log.i("WEB","Allow private CA");
+                if (sharedPref.getBoolean("allow_private_certs", false)) {
+                    handler.proceed();
+                } else {
+                    handler.cancel();
+                    String errorMsg = getString(R.string.https_error_html);
+                    wv.loadData(errorMsg, "text/html", null);
+                    httpsError = true;
+                }
+            }
+        });
 
         wv.setSwipeListener(this);
         wv.getSettings().setLoadWithOverviewMode(true);
@@ -149,6 +166,15 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
         wv.getSettings().setDomStorageEnabled(true);
         wv.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
         wv.getSettings().setMediaPlaybackRequiresUserGesture(sharedPref.getBoolean("auto_play_video", false));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (WebViewFeature.isFeatureSupported(WebViewFeature.ALGORITHMIC_DARKENING)) {
+                wv.getSettings().setAlgorithmicDarkeningAllowed(true);
+            }
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
+                wv.getSettings().setForceDark(WebSettings.FORCE_DARK_AUTO);
+            }
+        }
 
         final String url = sharedPref.getString("url","");
 
@@ -188,6 +214,7 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             wv.loadUrl(currentURL);
         }
@@ -290,6 +317,13 @@ public class FullscreenActivity extends AppCompatActivity implements SwipeLister
                     }
                 } else {
                     wv.loadUrl(url);
+                }
+            } else {
+                if (httpsError) {
+                    httpsError = false;
+                    wv.loadUrl(url);
+                } else {
+                    wv.reload();
                 }
             }
             boolean screenOn = sharedPref.getBoolean("screen_lock", false);

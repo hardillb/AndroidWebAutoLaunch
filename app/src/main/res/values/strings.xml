@@ -9,6 +9,7 @@
     <string name="title_launch_on_start">Launch on Start</string>
     <string name="title_lock_screen_on">Lock screen on</string>
     <string name="title_auto_play_video">Auto Play Video</string>
+    <string name="title_allow_private_certs">Trust All Certificates</string>
     <string name="about">About</string>
     <string name="about_html">&lt;html&gt;
 &lt;body&gt;
@@ -31,6 +32,14 @@ limitations under the License.&lt;/p&gt;
 
 &lt;h2&gt;Attribution&lt;/h2&gt;
 Icon made by &lt;a href=&quot;http://www.freepik.com/&quot;&gt;Freepik&lt;/a&gt; from &lt;a href=&quot;http://www.flaticon.com/&quot;&gt;www.flaticon.com&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;</string>
+    <string name="https_error_html">&lt;html&gt;
+&lt;body&gt;
+&lt;h1&gt;HTTPS Certificate Error&lt;/h1&gt;
+
+&lt;p&gt;The server certificate is not valid.&lt;/p&gt;
+&lt;p&gt;You can disable checking in the Settings&lt;/p&gt;
 &lt;/body&gt;
 &lt;/html&gt;</string>
 
