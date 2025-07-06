@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace 'uk.me.hardill.weblauncher':wq!
+    namespace 'uk.me.hardill.weblauncher'
     defaultConfig {
         applicationId "uk.me.hardill.weblauncher"
         minSdkVersion 21
@@ -20,7 +20,6 @@ android {
         targetCompatibility agp_version
     }
     compileSdk 35
-    buildToolsVersion '35.0.0 rc4'
 }
 
 dependencies {
